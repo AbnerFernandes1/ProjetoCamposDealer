@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoCamposDealer.Services.Interfaces;
 using ProjetoDealer.Domain;
-using ProjetoDealer.Services.Interfaces;
 
 namespace ProjetoCamposDealer.Controllers
 {

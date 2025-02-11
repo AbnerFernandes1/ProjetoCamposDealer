@@ -10,12 +10,12 @@ namespace ProjetoCamposDealer.Services
         private readonly IPersistenceContext _persistence;
         private readonly IProdutoContext _produtoContext;
         private readonly IClienteContext _clienteContext;
-        private readonly IVendasContext _vendasContext;
+        private readonly IVendaContext _vendasContext;
 
         public VendaService(IPersistenceContext persistence,
                             IProdutoContext produtoContext,
                             IClienteContext clienteContext,
-                            IVendasContext vendasContext)
+                            IVendaContext vendasContext)
         {
             _persistence = persistence;
             _produtoContext = produtoContext;

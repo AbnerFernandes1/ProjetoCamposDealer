@@ -1,6 +1,6 @@
 ﻿using ProjetoDealer.Domain;
 
-namespace ProjetoDealer.Services.Interfaces
+namespace ProjetoCamposDealer.Services.Interfaces
 {
     public interface IProdutoService
     {

@@ -1,8 +1,8 @@
-﻿using ProjetoDealer.Application.Data.Interfaces;
+﻿using ProjetoCamposDealer.Services.Interfaces;
+using ProjetoDealer.Application.Data.Interfaces;
 using ProjetoDealer.Domain;
-using ProjetoDealer.Services.Interfaces;
 
-namespace ProjetoDealer.Services
+namespace ProjetoCamposDealer.Services
 {
     public class ProdutoService : IProdutoService
     {

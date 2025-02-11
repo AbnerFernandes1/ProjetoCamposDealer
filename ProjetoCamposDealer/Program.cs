@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using ProjetoCamposDealer.Services;
+using ProjetoCamposDealer.Services.Interfaces;
 using ProjetoDealer.Application.Data.Context;
 using ProjetoDealer.Application.Data.Interfaces;
-using ProjetoDealer.Services;
-using ProjetoDealer.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +16,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IVendaService, VendaService>();
+builder.Services.AddScoped<IVendaContext, VendaContext>();
 builder.Services.AddScoped<IClienteContext, ClienteContext>();
 builder.Services.AddScoped<IPersistenceContext, PersistenceContext>();
 builder.Services.AddScoped<IProdutoContext, ProdutoContext>();
-builder.Services.AddScoped<IVendasContext, VendasContext>();
 
 var app = builder.Build();
 

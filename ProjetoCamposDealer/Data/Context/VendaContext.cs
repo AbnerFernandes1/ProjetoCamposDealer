@@ -5,11 +5,11 @@ using ProjetoDealer.Domain;
 
 namespace ProjetoDealer.Application.Data.Context
 {
-    public class VendasContext : IVendasContext
+    public class VendaContext : IVendaContext
     {
         private readonly AppDbContext _context;
 
-        public VendasContext(AppDbContext context)
+        public VendaContext(AppDbContext context)
         {
             _context = context;
         }
