@@ -39,9 +39,9 @@ namespace ProjetoCamposDealer.Controllers
             {
                 var venda = await _service.AddAsync(model);
 
-                if(venda is null)
+                if(venda is null) return NotFound();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new {page = 1, name = "", description = "" });
             }
             
             return View(model);
