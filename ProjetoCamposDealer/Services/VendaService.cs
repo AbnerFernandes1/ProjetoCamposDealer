@@ -14,11 +14,12 @@ namespace ProjetoCamposDealer.Services
 
         public VendaService(IPersistenceContext persistence,
                             IProdutoContext produtoContext,
-                            IClienteContext _clienteContext,
+                            IClienteContext clienteContext,
                             IVendasContext vendasContext)
         {
             _persistence = persistence;
             _produtoContext = produtoContext;
+            _clienteContext = clienteContext;
             _vendasContext = vendasContext;
         }
 
@@ -116,8 +117,8 @@ namespace ProjetoCamposDealer.Services
         {
             var viewModel = new VendaViewModel
             {
-                Clientes = await _clienteContext.GetClientesAsync(1, null),
-                Produtos = await _produtoContext.GetProdutosAsync(1, null),
+                Clientes = await _clienteContext.GetClientesAsync(),
+                Produtos = await _produtoContext.GetProdutosAsync(),
             };
             return viewModel;
         }
