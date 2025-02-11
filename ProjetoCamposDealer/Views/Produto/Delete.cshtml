@@ -1,0 +1,22 @@
+﻿@model Produto
+
+@{
+    ViewData["Title"] = "Deseja realmente deletar esse produto ?";
+}
+
+<div>
+    <h3>@ViewData["Title"]</h3>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(item => item.idProduto):</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(item => item.idProduto)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(item => item.dscProduto):</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(item => item.dscProduto)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(item => item.vlrUnitario):</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(item => item.vlrUnitario)</dd>
+    </dl>
+    <form asp-action="Delete" asp-controller="Produto" class="btn-group-sm">
+        <input asp-for="idProduto" type="hidden" />
+        <input type="submit" value="Excluir" class="btn btn-warning btn-sm" />
+        <a asp-action="Index" class="btn btn-danger btn-sm">Cancelar</a>
+    </form>
+</div>
