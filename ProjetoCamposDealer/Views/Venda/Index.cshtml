@@ -1,0 +1,51 @@
+@model IEnumerable<Venda>
+
+@{
+    ViewData["Title"] = "Lista de vendas";
+}
+
+<div class="container">
+    <h3 class="text-primary">@ViewData["Title"]</h3>
+
+    @using (Html.BeginForm())
+    {
+        <div class="input-group mb-3 border-0">
+            <div class="input-group-prepend">
+                <a asp-action="Create" class="btn btn-success" type="button">Novo</a>
+                <input type="submit" value="Pesquisar" class="btn btn-primary" />
+            </div>
+            <input type="text" class="form-control" name="name">
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.idVenda)</th>
+                <th>@Html.DisplayNameFor(model => model.idCliente)</th>
+                <th>Nome</th>
+                <th>@Html.DisplayNameFor(model => model.qtdVenda)</th>
+                <th>@Html.DisplayNameFor(model => model.vlrTotalVenda)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idVenda</td>
+                        <td>@item.idCliente</td>
+                        <td>@item.Clientes.nmCliente</td>
+                        <td>@item.qtdVenda</td>
+                        <td>@item.vlrTotalVenda</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.idVenda" class="btn btn-info btn-sm"><i class="fa-solid fa-circle-info"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.idVenda" class="btn btn-warning btn-sm"><i class="fa fa-pencil-alt"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.idVenda" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
