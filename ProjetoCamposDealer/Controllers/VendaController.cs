@@ -46,5 +46,41 @@ namespace ProjetoCamposDealer.Controllers
             model.Produtos = _context.Produtos.ToList();
             return View(model);
         }
+
+        [Route("novo")]
+        public async Task<IActionResult> Create()
+        {
+            var viewModel = new VendaViewModel
+            {
+                Clientes = _context.Clientes.ToList(),
+                Produtos = _context.Produtos.ToList(),
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost("novo")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(VendaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var venda = new Venda
+                {
+                    idCliente = model.idCliente,
+                    idProduto = model.idProduto,
+                };
+
+                _context.Vendas.Add(venda);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            model.Clientes = _context.Clientes.ToList();
+            model.Produtos = _context.Produtos.ToList();
+            
+            return View(model);
+        }
     }
 }
