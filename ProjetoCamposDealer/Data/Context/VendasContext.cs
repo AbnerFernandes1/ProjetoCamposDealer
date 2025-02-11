@@ -24,7 +24,7 @@ namespace ProjetoDealer.Application.Data.Context
 
         }
 
-        public async Task<Venda[]> GetVendasByNameAsync(int page, string nameCliente, string descriptionProduto)
+        public async Task<Venda[]> GetVendasByPageByNamesAsync(int page, string nameCliente, string descriptionProduto)
         {
             int pageNumber = page <= 0 ? 1 : page;
 
