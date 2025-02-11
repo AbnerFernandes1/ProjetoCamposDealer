@@ -4,15 +4,15 @@ namespace ProjetoDealer.Domain
 {
     public class Cliente
     {
-        [Display(Name = "Código")]
+        [Display(Name = "CÃ³digo")]
         public int idCliente { get; set; }
 
         [Display(Name = "Nome")]
-        [Required(ErrorMessage = "{0} obrigatório")]
-        [StringLength(60, ErrorMessage = "{0} deve conter até {1} caracteres")]
+        [Required(ErrorMessage = "{0} obrigatÃ³rio")]
+        [StringLength(60, ErrorMessage = "{0} deve conter atÃ© {1} caracteres")]
         public string? nmCliente { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatória")]
+        [Required(ErrorMessage = "{0} obrigatÃ³ria")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "{0} deve conter entre {2} a {1} caracteres")]
         public string? Cidade { get; set; }  
     }

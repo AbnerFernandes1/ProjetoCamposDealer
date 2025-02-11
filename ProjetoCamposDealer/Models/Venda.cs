@@ -4,22 +4,22 @@ namespace ProjetoDealer.Domain
 {
     public class Venda
     {
-        [Display(Name = "C骴igo")]
+        [Display(Name = "C贸digo")]
         public int idVenda { get; set; }
 
-        [Display(Name = "C骴igo cliente")]
-        [Required(ErrorMessage = "{0} obrigat髍io")]
+        [Display(Name = "C贸digo cliente")]
+        [Required(ErrorMessage = "{0} obrigat贸rio")]
         public int idCliente { get; set; }
         public Cliente Clientes { get; set; }
 
-        [Display(Name = "C骴igo produto")]
-        [Required(ErrorMessage = "{0} obrigat髍io")]
+        [Display(Name = "C贸digo produto")]
+        [Required(ErrorMessage = "{0} obrigat贸rio")]
         public int idProduto { get; set; }
         public Produto Produtos { get; set; }
 
         [Display(Name = "Quantidade venda")]
-        [Required(ErrorMessage = "{0} obrigat髍ia")]
-        [Range(1, 999, ErrorMessage = "{0} deve ser no m韓imo {1} e no m醲imo {2}")]
+        [Required(ErrorMessage = "{0} obrigat贸ria")]
+        [Range(1, 999, ErrorMessage = "{0} deve ser no m铆nimo {1} e no m谩ximo {2}")]
         public int qtdVenda { get; set; }
         public float vlrUnitarioVenda { get; set; }
         public DateTime dthVenda { get; set; } = DateTime.Now;
