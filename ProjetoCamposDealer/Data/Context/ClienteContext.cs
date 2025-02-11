@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using ProjetoDealer.Application.Constantes;
 using ProjetoDealer.Application.Data.Interfaces;
 using ProjetoDealer.Domain;
@@ -13,6 +12,12 @@ namespace ProjetoDealer.Application.Data.Context
         public ClienteContext(AppDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<Cliente[]> GetClientesAsync()
+        {
+            var Clientes = await _context.Clientes.AsNoTracking().ToArrayAsync();
+            return Clientes;
         }
 
         public async Task<Cliente[]> GetClientesAsync(int page, string name)

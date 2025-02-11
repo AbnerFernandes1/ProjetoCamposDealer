@@ -14,6 +14,12 @@ namespace ProjetoDealer.Application.Data.Context
             _context = context;
         }
 
+        public async Task<Produto[]> GetProdutosAsync()
+        {
+            var produtos = await _context.Produtos.AsNoTracking().ToArrayAsync();
+            return produtos;
+        }
+
         public async Task<Produto[]> GetProdutosAsync(int page, string descricao)
         {
             int pageNumber = page <= 0 ? 1 : page;
