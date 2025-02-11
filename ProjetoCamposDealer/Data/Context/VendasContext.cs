@@ -24,19 +24,10 @@ namespace ProjetoDealer.Application.Data.Context
 
         }
 
-        public async Task<Venda[]> GetVendasAsync(int pageNumber)
+        public async Task<Venda[]> GetVendasByNameAsync(int page, string nameCliente, string descriptionProduto)
         {
-            var vendas = _context.Vendas.AsNoTracking()
-                .Skip((pageNumber - 1) * Paginacao.LIMITE_PESQUISA_POR_PAGINA)
-                .Include(v => v.Produtos)
-                .Include(v => v.Clientes)
-                .Take(Paginacao.LIMITE_PESQUISA_POR_PAGINA);
+            int pageNumber = page <= 0 ? 1 : page;
 
-            return await vendas.ToArrayAsync();
-        }
-
-        public async Task<Venda[]> GetVendasByNameAsync(string descriptionProduto, string nameCliente)
-        {
             IQueryable<Venda> query = _context.Vendas
                 .Include(v => v.Produtos)
                 .Include(v => v.Clientes);
@@ -52,6 +43,11 @@ namespace ProjetoDealer.Application.Data.Context
                 query = query.Where(p => p.Clientes.nmCliente
                     .ToUpper().Contains(nameCliente.ToUpper()));
             }
+
+            query = query.Skip((pageNumber - 1) * Paginacao.LIMITE_PESQUISA_POR_PAGINA)
+                .Include(v => v.Produtos)
+                .Include(v => v.Clientes)
+                .Take(Paginacao.LIMITE_PESQUISA_POR_PAGINA);
 
             return await query.ToArrayAsync();
         }
