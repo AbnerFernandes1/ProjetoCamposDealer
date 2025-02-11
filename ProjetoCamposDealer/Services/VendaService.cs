@@ -9,10 +9,12 @@ namespace ProjetoCamposDealer.Services
     {
         private readonly IPersistenceContext _persistence;
         private readonly IProdutoContext _produtoContext;
+        private readonly IClienteContext _clienteContext;
         private readonly IVendasContext _vendasContext;
 
         public VendaService(IPersistenceContext persistence,
                             IProdutoContext produtoContext,
+                            IClienteContext _clienteContext,
                             IVendasContext vendasContext)
         {
             _persistence = persistence;
@@ -81,9 +83,9 @@ namespace ProjetoCamposDealer.Services
             return cliente;
         }
 
-        public async Task<Venda[]> GetByPageAndNameAndDescriptionAsync(int page, string name, string descricao)
+        public async Task<Venda[]> GetByPageAndNameAndDescriptionAsync(int page, string name, string description)
         {
-            var Venda = await _vendasContext.GetVendasByPageByNamesAsync(page, name, descricao);
+            var Venda = await _vendasContext.GetVendasByPageByNamesAsync(page, name, description);
             return Venda;
         }
 
@@ -108,6 +110,16 @@ namespace ProjetoCamposDealer.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<VendaViewModel> GetViewModelVendaAsync()
+        {
+            var viewModel = new VendaViewModel
+            {
+                Clientes = await _clienteContext.GetClientesAsync(1, null),
+                Produtos = await _produtoContext.GetProdutosAsync(1, null),
+            };
+            return viewModel;
         }
     }
 }

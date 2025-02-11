@@ -1,61 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoCamposDealer.Models;
-using ProjetoDealer.Application.Data.Context;
-using ProjetoDealer.Domain;
+using ProjetoCamposDealer.Services.Interfaces;
 
 namespace ProjetoCamposDealer.Controllers
 {
     [Route("vendas")]
     public class VendaController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IVendaService _service;
 
-        public VendaController(AppDbContext context)
+        public VendaController(IVendaService service)
         {
-            _context = context;
+            _service = service;
         }
 
-        public async Task<IActionResult> Index()
+        [Route("lista")]
+        public async Task<ViewResult> Index(int page, string name, string description)
         {
-            var viewModel = new VendaViewModel
-            {
-                Clientes = _context.Clientes.ToList(),
-                Produtos = _context.Produtos.ToList(),
-            };
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Index(VendaViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var venda = new Venda
-                {
-                    idCliente = model.idCliente,
-                    idProduto = model.idProduto,
-                };
-
-                _context.Vendas.Add(venda);
-                _context.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-
-            model.Clientes = _context.Clientes.ToList();
-            model.Produtos = _context.Produtos.ToList();
-            return View(model);
+            var venda = await _service.GetByPageAndNameAndDescriptionAsync(page, name, description);
+            return View(venda);
         }
 
         [Route("novo")]
         public async Task<IActionResult> Create()
         {
-            var viewModel = new VendaViewModel
-            {
-                Clientes = _context.Clientes.ToList(),
-                Produtos = _context.Produtos.ToList(),
-            };
-
+            var viewModel = await _service.GetViewModelVendaAsync();
             return View(viewModel);
         }
 
@@ -65,23 +34,14 @@ namespace ProjetoCamposDealer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var venda = new Venda
-                {
-                    idCliente = model.idCliente,
-                    idProduto = model.idProduto,
-                };
+                var venda = await _service.AddAsync(model);
 
-                _context.Vendas.Add(venda);
-                _context.SaveChanges();
+                if(venda is null)
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-
-            model.Clientes = _context.Clientes.ToList();
-            model.Produtos = _context.Produtos.ToList();
             
             return View(model);
         }
-
     }
 }
