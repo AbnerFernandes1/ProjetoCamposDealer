@@ -15,7 +15,7 @@ namespace ProjetoCamposDealer.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var viewModel = new VendaViewModel
             {
@@ -82,5 +82,6 @@ namespace ProjetoCamposDealer.Controllers
             
             return View(model);
         }
+
     }
 }
