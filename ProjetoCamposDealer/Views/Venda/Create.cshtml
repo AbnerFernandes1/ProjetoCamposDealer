@@ -27,7 +27,7 @@
             <select asp-for="idCliente" class="form-select" aria-label="Default select example">
                 @{
                     <option selected>Selecione um cliente</option>
-
+                
                     foreach (var cliente in Model.Clientes)
                     {
                         <option value="@cliente.idCliente">@cliente.nmCliente</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="p-1">
             <label class="col-form-label">Quantidade:</label>
-            <input type="number" class="form-control border-1 border border-dark-subtle rounded" name="quantidade">
+            <input asp-for="qtdVenda" type="number" class="form-control border-1 border border-dark-subtle rounded">
             <span asp-validation-for="qtdVenda" class="text-danger"></span>
         </div>
         <div class="btn-group-sm p-1">

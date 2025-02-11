@@ -32,6 +32,9 @@ namespace ProjetoCamposDealer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VendaViewModel model)
         {
+            ModelState.Remove("Clientes");
+            ModelState.Remove("Produtos");
+
             if (ModelState.IsValid)
             {
                 var venda = await _service.AddAsync(model);
