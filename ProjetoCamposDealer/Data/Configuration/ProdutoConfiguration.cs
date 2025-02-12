@@ -17,7 +17,7 @@ namespace ProjetoDealer.Application.Data.Configuration
                 .IsRequired();
 
             builder.Property(c => c.vlrUnitario)
-                .HasColumnType("float(6,2)")
+                .HasColumnType("float(12,2)")
                 .IsRequired();
         }
     }

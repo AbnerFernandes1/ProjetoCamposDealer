@@ -17,11 +17,11 @@ namespace ProjetoDealer.Application.Data.Configuration
                 .IsRequired();
 
             builder.Property(p => p.vlrUnitarioVenda)
-                .HasColumnType("numeric(6,2)")
+                .HasColumnType("numeric(12,2)")
                 .IsRequired();
 
             builder.Property(p => p.vlrTotalVenda)
-                .HasColumnType("numeric(6,2)")
+                .HasColumnType("numeric(12,2)")
                 .IsRequired();
 
             builder.Property(p => p.dthVenda)
