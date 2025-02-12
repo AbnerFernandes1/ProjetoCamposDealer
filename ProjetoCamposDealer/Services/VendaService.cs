@@ -80,8 +80,8 @@ namespace ProjetoCamposDealer.Services
 
         public async Task<Venda> GetByIdAsync(int id)
         {
-            var cliente = await _vendasContext.GetVendaByIdAsync(id);
-            return cliente;
+            var venda = await _vendasContext.GetVendaByIdAsync(id);
+            return venda;
         }
 
         public async Task<Venda[]> GetByPageAndNameAndDescriptionAsync(int page, string name, string description)
@@ -120,23 +120,29 @@ namespace ProjetoCamposDealer.Services
             if(id > 0)
             {
                 var venda = await _vendasContext.GetVendaByIdAsync(id);
+                var produtos = await _produtoContext.GetProdutoByIdAsync(venda.idProduto);
+                var clientes = await _clienteContext.GetClienteByIdAsync(venda.idCliente);
 
                 viewModel = new VendaViewModel
                 {
-                    Clientes = await _clienteContext.GetClientesAsync(),
-                    Produtos = await _produtoContext.GetProdutosAsync(),
+                    ClientesLista = await _clienteContext.GetClientesAsync(),
+                    ProdutosLista = await _produtoContext.GetProdutosAsync(),
                     idVenda = venda.idVenda,
+                    idProduto = venda.idProduto,
+                    idCliente = venda.idCliente,
                     vlrTotalVenda = venda.vlrTotalVenda,
                     vlrUnitarioVenda = venda.vlrUnitarioVenda,
                     qtdVenda = venda.qtdVenda,
+                    Produtos = produtos,
+                    Clientes = clientes,
                 };
             }
             else
             {
                 viewModel = new VendaViewModel
                 {
-                    Clientes = await _clienteContext.GetClientesAsync(),
-                    Produtos = await _produtoContext.GetProdutosAsync(),
+                    ClientesLista = await _clienteContext.GetClientesAsync(),
+                    ProdutosLista = await _produtoContext.GetProdutosAsync(),
                 };
             }
 

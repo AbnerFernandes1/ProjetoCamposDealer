@@ -15,9 +15,9 @@
                     @{
                         <option value="0" selected>Selecione um produto</option>
 
-                        if (Model.Produtos is not null)
+                        if (Model.ProdutosLista is not null)
                         {
-                            foreach (var produto in Model.Produtos)
+                            foreach (var produto in Model.ProdutosLista)
                             {
                                 <option value="@produto.idProduto">@produto.dscProduto</option>
                             }
@@ -32,9 +32,9 @@
                     @{
                         <option value="0" selected>Selecione um cliente</option>
 
-                        if (Model.Produtos is not null)
+                        if (Model.ClientesLista is not null)
                         {
-                            foreach (var cliente in Model.Clientes)
+                            foreach (var cliente in Model.ClientesLista)
                             {
                                 <option value="@cliente.idCliente">@cliente.nmCliente</option>
                             }

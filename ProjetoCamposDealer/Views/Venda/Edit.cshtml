@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Editar Venda";
 }
+
 <div c lass="row">
     <div class="col-md-4">
         <form asp-controller="Venda" asp-action="Edit">
@@ -13,13 +14,16 @@
                 <label class="col-form-label">Produtos</label>
                 <select asp-for="idProduto" class="form-select" aria-label="Default select example">
                     @{
-                        <option value="@Model.idProduto" selected>@Model.Produtos.Where(p => p.idProduto == Model.idProduto)</option>
-
-                        if (Model.Produtos is not null)
+                        if (Model.ProdutosLista is not null)
                         {
-                            foreach (var produto in Model.Produtos)
+                            <option value="@Model.idProduto" selected>@Model.Produtos.dscProduto</option>
+
+                            @foreach (var produto in Model.ProdutosLista)
                             {
-                                <option value="@produto.idProduto">@produto.dscProduto</option>
+                                if(Model.idProduto != produto.idProduto)
+                                {
+                                    <option value="@produto.idProduto">@produto.dscProduto</option>
+                                }
                             }
                         }
                     }
@@ -30,13 +34,16 @@
                 <label class="col-form-label">Clientes</label>
                 <select asp-for="idCliente" class="form-select" aria-label="Default select example">
                     @{
-                        <option value="@Model.idProduto" selected>@Model.Clientes.Where(p => p.idCliente == Model.idCliente)</option>
-
-                        if (Model.Clientes is not null)
+                        if (Model.ClientesLista is not null)
                         {
-                            foreach (var cliente in Model.Clientes)
+                            <option value="@Model.idCliente" selected>@Model.Clientes.nmCliente</option>    
+
+                            @foreach (var cliente in Model.ClientesLista)
                             {
-                                <option value="@cliente.idCliente">@cliente.nmCliente</option>
+                                if(Model.idCliente != cliente.idCliente)
+                                {
+                                    <option value="@cliente.idCliente">@cliente.nmCliente</option>
+                                }
                             }
                         }
                     }
@@ -45,7 +52,7 @@
             </div>
             <div class="p-1">
                 <label asp-for="qtdVenda" class="col-form-label">Quantidade:</label>
-                <input asp-for="qtdVenda" type="number" class="form-control border-1 border border-dark-subtle rounded" value="0">
+                <input asp-for="qtdVenda" type="number" class="form-control border-1 border border-dark-subtle rounded">
                 <span asp-validation-for="qtdVenda" class="text-danger"></span>
             </div>
 

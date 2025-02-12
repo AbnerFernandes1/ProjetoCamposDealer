@@ -20,7 +20,7 @@ namespace ProjetoDealer.Application.Data.Context
                 .Include(v => v.Clientes)
                 .Include(v => v.Produtos);
 
-            return await venda.FirstOrDefaultAsync(v => v.idVenda == id); ;
+            return await venda.FirstOrDefaultAsync(v => v.idVenda == id);
 
         }
 

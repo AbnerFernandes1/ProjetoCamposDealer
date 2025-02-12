@@ -1,4 +1,4 @@
-@model VendaViewModel
+@model Venda
 
 @{
     ViewData["Title"] = "Detalhes da venda";
@@ -12,8 +12,12 @@
         <dd class="col-sm-10">@Html.DisplayFor(item => item.dthVenda)</dd>
         <dt class="col-sm-2">@Html.DisplayNameFor(item => item.idCliente):</dt>
         <dd class="col-sm-10">@Html.DisplayFor(item => item.idCliente)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(item => item.Clientes.nmCliente):</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(item => item.Clientes.nmCliente)</dd>
         <dt class="col-sm-2">@Html.DisplayNameFor(item => item.idProduto):</dt>
         <dd class="col-sm-10">@Html.DisplayFor(item => item.idProduto)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(item => item.Produtos.dscProduto):</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(item => item.Produtos.dscProduto)</dd>
         <dt class="col-sm-2">@Html.DisplayNameFor(item => item.qtdVenda):</dt>
         <dd class="col-sm-10">@Html.DisplayFor(item => item.qtdVenda)</dd>
         <dt class="col-sm-2">@Html.DisplayNameFor(item => item.vlrUnitarioVenda):</dt>
