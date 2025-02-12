@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ProjetoCamposDealer.Models;
 using ProjetoCamposDealer.Services.Interfaces;
 
@@ -39,12 +40,14 @@ namespace ProjetoCamposDealer.Controllers
             {
                 var venda = await _service.AddAsync(model);
 
-                if(venda is null) return NotFound();
+                if (venda is null) return NotFound();
 
-                return RedirectToAction(nameof(Index), new {page = 1, name = "", description = "" });
+                return RedirectToAction(nameof(Index), new { page = 1, name = "", description = "" });
             }
+
+            var viewModel = await _service.GetViewModelVendaAsync();
             
-            return View(model);
+            return View(viewModel);
         }
     }
 }

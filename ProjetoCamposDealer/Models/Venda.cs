@@ -9,11 +9,13 @@ namespace ProjetoDealer.Domain
 
         [Display(Name = "Código cliente")]
         [Required(ErrorMessage = "{0} obrigatório")]
+        [Range(1, int.MaxValue, ErrorMessage = "Deve ser informado um cliente.")]
         public int idCliente { get; set; }
         public Cliente Clientes { get; set; }
 
         [Display(Name = "Código produto")]
         [Required(ErrorMessage = "{0} obrigatório")]
+        [Range(1, int.MaxValue, ErrorMessage = "Deve ser informado um produto.")]
         public int idProduto { get; set; }
         public Produto Produtos { get; set; }
 

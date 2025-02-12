@@ -3,46 +3,61 @@
 @{
     ViewData["Title"] = "Cadastro de Venda";
 }
-<div class="row">
+<div c lass="row">
     <div class="col-md-4">
-    <form asp-controller="Venda" asp-action="Create">
-        <h3 class="text-primary">@ViewData["Title"]</h3>
+        <form asp-controller="Venda" asp-action="Create">
+            <h3 class="text-primary">@ViewData["Title"]</h3>
 
-        <div asp-asp-validation-summary="ModelOnly"></div>
-        <div class="container p-1">
-            <label class="col-form-label">Produtos</label>
-            <select asp-for="idProduto" class="form-select" aria-label="Default select example">
-                @{
-                    <option selected>Selecione um produto</option>
+            <div asp-asp-validation-summary="ModelOnly"></div>
+            <div class="container p-1">
+                <label class="col-form-label">Produtos</label>
+                <select asp-for="idProduto" class="form-select" aria-label="Default select example">
+                    @{
+                        <option value="0" selected>Selecione um produto</option>
 
-                    foreach (var produto in Model.Produtos)
-                    {
-                        <option value="@produto.idProduto">@produto.dscProduto</option>
+                        if (Model.Produtos is not null)
+                        {
+                            foreach (var produto in Model.Produtos)
+                            {
+                                <option value="@produto.idProduto">@produto.dscProduto</option>
+                            }
+                        }
                     }
-                }
-            </select>
-        </div>
-        <div class="container p-1">
-            <label class="col-form-label">Clientes</label>
-            <select asp-for="idCliente" class="form-select" aria-label="Default select example">
-                @{
-                    <option selected>Selecione um cliente</option>
-                
-                    foreach (var cliente in Model.Clientes)
-                    {
-                        <option value="@cliente.idCliente">@cliente.nmCliente</option>
+                </select>
+                <span asp-validation-for="idProduto" class="text-danger"></span>
+            </div>
+            <div class="container p-1">
+                <label class="col-form-label">Clientes</label>
+                <select asp-for="idCliente" class="form-select" aria-label="Default select example">
+                    @{
+                        <option value="0" selected>Selecione um cliente</option>
+
+                        if (Model.Produtos is not null)
+                        {
+                            foreach (var cliente in Model.Clientes)
+                            {
+                                <option value="@cliente.idCliente">@cliente.nmCliente</option>
+                            }
+                        }
                     }
-                }
-            </select>
-        </div>
-        <div class="p-1">
-            <label class="col-form-label">Quantidade:</label>
-            <input asp-for="qtdVenda" type="number" class="form-control border-1 border border-dark-subtle rounded">
-            <span asp-validation-for="qtdVenda" class="text-danger"></span>
-        </div>
-        <div class="btn-group-sm p-1">
-            <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
-            <a asp-action="Index" class="btn btn-danger btn-sm">Canelar</a>
-        </div>
-    </form>
-</div>
+                </select>
+                <span asp-validation-for="idCliente" class="text-danger"></span>
+            </div>
+            <div class="p-1">
+                <label asp-for="qtdVenda" class="col-form-label">Quantidade:</label>
+                <input asp-for="qtdVenda" type="number" class="form-control border-1 border border-dark-subtle rounded" value="0">
+                <span asp-validation-for="qtdVenda" class="text-danger"></span>
+            </div>
+
+            <div class="btn-group-sm p-1">
+                <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
+                <a asp-action="Index" class="btn btn-danger btn-sm">Canelar</a>
+            </div>
+        </form>
+    </div>
+
+@section scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
