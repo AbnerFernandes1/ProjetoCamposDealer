@@ -113,13 +113,33 @@ namespace ProjetoCamposDealer.Services
             }
         }
 
-        public async Task<VendaViewModel> GetViewModelVendaAsync()
+        public async Task<VendaViewModel> GetViewModelVendaAsync(int id = 0)
         {
-            var viewModel = new VendaViewModel
+            var viewModel = new VendaViewModel();
+
+            if(id > 0)
             {
-                Clientes = await _clienteContext.GetClientesAsync(),
-                Produtos = await _produtoContext.GetProdutosAsync(),
-            };
+                var venda = await _vendasContext.GetVendaByIdAsync(id);
+
+                viewModel = new VendaViewModel
+                {
+                    Clientes = await _clienteContext.GetClientesAsync(),
+                    Produtos = await _produtoContext.GetProdutosAsync(),
+                    idVenda = venda.idVenda,
+                    vlrTotalVenda = venda.vlrTotalVenda,
+                    vlrUnitarioVenda = venda.vlrUnitarioVenda,
+                    qtdVenda = venda.qtdVenda,
+                };
+            }
+            else
+            {
+                viewModel = new VendaViewModel
+                {
+                    Clientes = await _clienteContext.GetClientesAsync(),
+                    Produtos = await _produtoContext.GetProdutosAsync(),
+                };
+            }
+
             return viewModel;
         }
     }
