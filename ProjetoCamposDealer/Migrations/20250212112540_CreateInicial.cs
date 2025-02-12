@@ -56,8 +56,8 @@ namespace ProjetoCamposDealer.Migrations
                 {
                     idCliente = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nmCliente = table.Column<string>(type: "varchar(20)", maxLength: 60, nullable: false),
-                    Cidade = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    nmCliente = table.Column<string>(type: "varchar(60)", maxLength: 60, nullable: false),
+                    Cidade = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -191,9 +191,7 @@ namespace ProjetoCamposDealer.Migrations
                     idVenda = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     idCliente = table.Column<int>(type: "int", nullable: false),
-                    ClientesidCliente = table.Column<int>(type: "int", nullable: false),
                     idProduto = table.Column<int>(type: "int", nullable: false),
-                    ProdutosidProduto = table.Column<int>(type: "int", nullable: false),
                     qtdVenda = table.Column<decimal>(type: "numeric(3,0)", nullable: false),
                     vlrUnitarioVenda = table.Column<decimal>(type: "numeric(6,2)", nullable: false),
                     dthVenda = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -203,14 +201,14 @@ namespace ProjetoCamposDealer.Migrations
                 {
                     table.PrimaryKey("PK_Vendas", x => x.idVenda);
                     table.ForeignKey(
-                        name: "FK_Vendas_Clientes_ClientesidCliente",
-                        column: x => x.ClientesidCliente,
+                        name: "FK_Vendas_Clientes_idCliente",
+                        column: x => x.idCliente,
                         principalTable: "Clientes",
                         principalColumn: "idCliente",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vendas_Produtos_ProdutosidProduto",
-                        column: x => x.ProdutosidProduto,
+                        name: "FK_Vendas_Produtos_idProduto",
+                        column: x => x.idProduto,
                         principalTable: "Produtos",
                         principalColumn: "idProduto",
                         onDelete: ReferentialAction.Cascade);
@@ -256,14 +254,14 @@ namespace ProjetoCamposDealer.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vendas_ClientesidCliente",
+                name: "IX_Vendas_idCliente",
                 table: "Vendas",
-                column: "ClientesidCliente");
+                column: "idCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vendas_ProdutosidProduto",
+                name: "IX_Vendas_idProduto",
                 table: "Vendas",
-                column: "ProdutosidProduto");
+                column: "idProduto");
         }
 
         /// <inheritdoc />

@@ -12,8 +12,8 @@ using ProjetoDealer.Application.Data.Context;
 namespace ProjetoCamposDealer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250211193519_AjusteForeingKeyVenda")]
-    partial class AjusteForeingKeyVenda
+    [Migration("20250212112540_CreateInicial")]
+    partial class CreateInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,11 +296,9 @@ namespace ProjetoCamposDealer.Migrations
 
                     b.HasKey("idVenda");
 
-                    b.HasIndex("idCliente")
-                        .IsUnique();
+                    b.HasIndex("idCliente");
 
-                    b.HasIndex("idProduto")
-                        .IsUnique();
+                    b.HasIndex("idProduto");
 
                     b.ToTable("Vendas", (string)null);
                 });
@@ -359,20 +357,30 @@ namespace ProjetoCamposDealer.Migrations
             modelBuilder.Entity("ProjetoDealer.Domain.Venda", b =>
                 {
                     b.HasOne("ProjetoDealer.Domain.Cliente", "Clientes")
-                        .WithOne()
-                        .HasForeignKey("ProjetoDealer.Domain.Venda", "idCliente")
+                        .WithMany("Vendas")
+                        .HasForeignKey("idCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetoDealer.Domain.Produto", "Produtos")
-                        .WithOne()
-                        .HasForeignKey("ProjetoDealer.Domain.Venda", "idProduto")
+                        .WithMany("Vendas")
+                        .HasForeignKey("idProduto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Clientes");
 
                     b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("ProjetoDealer.Domain.Cliente", b =>
+                {
+                    b.Navigation("Vendas");
+                });
+
+            modelBuilder.Entity("ProjetoDealer.Domain.Produto", b =>
+                {
+                    b.Navigation("Vendas");
                 });
 #pragma warning restore 612, 618
         }
