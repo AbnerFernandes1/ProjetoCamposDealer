@@ -16,5 +16,7 @@ namespace ProjetoDealer.Domain
         [Required(ErrorMessage = "{0} obrigatório")]
         [Range(0.01, 100000.00, ErrorMessage = "O preço deve estar entre 0,01 e 10.000,00.")]
         public float? vlrUnitario { get; set; }
+
+        public IEnumerable<Venda> Vendas { get; set; }
     }
 }

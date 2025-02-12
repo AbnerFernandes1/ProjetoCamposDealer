@@ -27,9 +27,9 @@ namespace ProjetoDealer.Application.Data.Configuration
             builder.Property(p => p.dthVenda)
                 .HasColumnType("datetime");
 
-            builder.HasOne(p => p.Produtos).WithOne().HasForeignKey<Venda>(p => p.idProduto);
+            builder.HasOne(p => p.Produtos).WithMany(p => p.Vendas).HasForeignKey(p => p.idProduto);
 
-            builder.HasOne(p => p.Clientes).WithOne().HasForeignKey<Venda>(p => p.idCliente);
+            builder.HasOne(p => p.Clientes).WithMany(p => p.Vendas).HasForeignKey(p => p.idCliente);
         }
     }
 }

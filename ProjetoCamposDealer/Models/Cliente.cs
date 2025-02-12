@@ -14,6 +14,8 @@ namespace ProjetoDealer.Domain
 
         [Required(ErrorMessage = "{0} obrigatória")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "{0} deve conter entre {2} a {1} caracteres")]
-        public string? Cidade { get; set; }  
+        public string? Cidade { get; set; }
+
+        public IEnumerable<Venda> Vendas { get; set; }
     }
 }

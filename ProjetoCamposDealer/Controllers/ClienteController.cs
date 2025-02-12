@@ -31,6 +31,8 @@ namespace ProjetoCamposDealer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("idCliente, nmCliente, Cidade")] Cliente cliente)
         {
+            ModelState.Remove("Vendas");
+
             if (ModelState.IsValid)
             {
                 var clienteContext = await _service.AddAsync(cliente);
@@ -68,6 +70,8 @@ namespace ProjetoCamposDealer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("idCliente, nmCliente, Cidade")] Cliente cliente)
         {
+            ModelState.Remove("Vendas");
+
             if (ModelState.IsValid)
             {
                 var clienteContext = await _service.UpdateAsync(id, cliente);
