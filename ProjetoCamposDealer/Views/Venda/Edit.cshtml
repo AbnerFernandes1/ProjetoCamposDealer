@@ -1,0 +1,63 @@
+@model VendaViewModel
+
+@{
+    ViewData["Title"] = "Editar Venda";
+}
+<div c lass="row">
+    <div class="col-md-4">
+        <form asp-controller="Venda" asp-action="Edit">
+            <h3 class="text-primary">@ViewData["Title"]</h3>
+
+            <div asp-asp-validation-summary="ModelOnly"></div>
+            <div class="container p-1">
+                <label class="col-form-label">Produtos</label>
+                <select asp-for="idProduto" class="form-select" aria-label="Default select example">
+                    @{
+                        <option value="@Model.idProduto" selected>@Model.Produtos.Where(p => p.idProduto == Model.idProduto)</option>
+
+                        if (Model.Produtos is not null)
+                        {
+                            foreach (var produto in Model.Produtos)
+                            {
+                                <option value="@produto.idProduto">@produto.dscProduto</option>
+                            }
+                        }
+                    }
+                </select>
+                <span asp-validation-for="idProduto" class="text-danger"></span>
+            </div>
+            <div class="container p-1">
+                <label class="col-form-label">Clientes</label>
+                <select asp-for="idCliente" class="form-select" aria-label="Default select example">
+                    @{
+                        <option value="@Model.idProduto" selected>@Model.Clientes.Where(p => p.idCliente == Model.idCliente)</option>
+
+                        if (Model.Clientes is not null)
+                        {
+                            foreach (var cliente in Model.Clientes)
+                            {
+                                <option value="@cliente.idCliente">@cliente.nmCliente</option>
+                            }
+                        }
+                    }
+                </select>
+                <span asp-validation-for="idCliente" class="text-danger"></span>
+            </div>
+            <div class="p-1">
+                <label asp-for="qtdVenda" class="col-form-label">Quantidade:</label>
+                <input asp-for="qtdVenda" type="number" class="form-control border-1 border border-dark-subtle rounded" value="0">
+                <span asp-validation-for="qtdVenda" class="text-danger"></span>
+            </div>
+
+            <div class="btn-group-sm p-1">
+                <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
+                <a asp-action="Index" class="btn btn-danger btn-sm">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+@section scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
