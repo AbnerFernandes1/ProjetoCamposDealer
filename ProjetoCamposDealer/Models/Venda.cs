@@ -23,8 +23,14 @@ namespace ProjetoDealer.Domain
         [Required(ErrorMessage = "{0} obrigatória")]
         [Range(1, 999, ErrorMessage = "{0} deve ser no mínimo {1} e no máximo {2}")]
         public int qtdVenda { get; set; }
+
+        [Display(Name = "Preço unitário")]
         public float vlrUnitarioVenda { get; set; }
+
+        [Display(Name = "Data pedido")]
         public DateTime dthVenda { get; set; } = DateTime.Now;
+
+        [Display(Name = "Valor venda")]
         public float vlrTotalVenda { get; set; }
     }
 }

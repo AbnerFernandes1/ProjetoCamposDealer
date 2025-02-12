@@ -5,16 +5,16 @@
 }
 
 <div class="container">
-    <h3 class="text-primary">@ViewData["Title"]</h3>
+    <h3 class="text-secondary text-center p-1">@ViewData["Title"]</h3>
 
     @using (Html.BeginForm())
     {
         <div class="input-group mb-3 border-0">
             <div class="input-group-prepend">
-                <a asp-action="Create" class="btn btn-success" type="button">Novo</a>
-                <input type="submit" value="Pesquisar" class="btn btn-primary" />
+                <a asp-action="Create" class="btn btn-primary" type="button">Novo</a>
+                <input type="submit" value="Pesquisar" class="btn btn-secondary" />
             </div>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control ms-1 rounded" name="name">
         </div>
     }
 

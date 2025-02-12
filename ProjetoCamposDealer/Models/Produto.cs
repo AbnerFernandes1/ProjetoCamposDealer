@@ -7,7 +7,7 @@ namespace ProjetoDealer.Domain
         [Display(Name = "Código")]
         public int idProduto { get; set; }
 
-        [Display(Name = "Descrição")]
+        [Display(Name = "Descrição produto")]
         [Required(ErrorMessage = "{0} obrigatória")]
         [StringLength(40, MinimumLength = 5, ErrorMessage = "{0} deve conter entre {2} a {1} caracteres")]
         public string? dscProduto { get; set; }

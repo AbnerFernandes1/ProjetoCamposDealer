@@ -7,7 +7,7 @@ namespace ProjetoDealer.Domain
         [Display(Name = "Código")]
         public int idCliente { get; set; }
 
-        [Display(Name = "Nome")]
+        [Display(Name = "Cliente")]
         [Required(ErrorMessage = "{0} obrigatório")]
         [StringLength(60, ErrorMessage = "{0} deve conter até {1} caracteres")]
         public string? nmCliente { get; set; }

@@ -1,11 +1,11 @@
 ﻿@model Produto
 
 @{
-    ViewData["Title"] = "Deseja realmente deletar esse produto ?";
+    ViewData["Title"] = "Informações do produto ?";
 }
 
 <div>
-    <h3>@ViewData["Title"]</h3>
+    <h3 class="text-secondary">@ViewData["Title"]</h3>
     <dl class="row">
         <dt class="col-sm-2">@Html.DisplayNameFor(item => item.idProduto):</dt>
         <dd class="col-sm-10">@Html.DisplayFor(item => item.idProduto)</dd>
@@ -14,9 +14,29 @@
         <dt class="col-sm-2">@Html.DisplayNameFor(item => item.vlrUnitario):</dt>
         <dd class="col-sm-10">@Html.DisplayFor(item => item.vlrUnitario)</dd>
     </dl>
-    <form asp-action="Delete" asp-controller="Produto" class="btn-group-sm">
+    <form id="deleteForm" asp-action="Delete" asp-controller="Produto" class="btn-group-sm">
         <input asp-for="idProduto" type="hidden" />
-        <input type="submit" value="Excluir" class="btn btn-warning btn-sm" />
+        <input data-bs-target="#exampleModal" data-bs-toggle="modal" type="button" value="Excluir"
+            class="btn btn-warning btn-sm" />
         <a asp-action="Index" class="btn btn-danger btn-sm">Cancelar</a>
+
+        <div class="container">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalLabel">Exclusão</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>Deseja realmente excluir esse produto ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Sim" class="btn btn-warning" />
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
