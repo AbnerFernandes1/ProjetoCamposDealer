@@ -4,7 +4,7 @@ namespace ProjetoDealer.Domain
 {
     public class Venda
     {
-        [Display(Name = "Código")]
+        [Display(Name = "ID venda")]
         public int idVenda { get; set; }
 
         [Display(Name = "Código cliente")]
