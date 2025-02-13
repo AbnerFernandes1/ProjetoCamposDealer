@@ -1,6 +1,6 @@
 ﻿using ProjetoDealer.Domain;
 
-namespace ProjetoCamposDealer.Models
+namespace ProjetoCamposDealer.ViweModel
 {
     public class VendaViewModel : Venda
     {

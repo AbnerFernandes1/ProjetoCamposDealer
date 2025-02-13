@@ -1,4 +1,4 @@
-using ProjetoCamposDealer.Models;
+using ProjetoCamposDealer.ViweModel;
 using ProjetoDealer.Domain;
 
 namespace ProjetoCamposDealer.Services.Interfaces
