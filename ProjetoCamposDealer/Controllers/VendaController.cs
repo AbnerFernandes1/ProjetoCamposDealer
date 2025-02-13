@@ -17,7 +17,7 @@ namespace ProjetoCamposDealer.Controllers
         [Route("lista")]
         public async Task<ViewResult> Index(int page, string name, string description)
         {
-            ViewData["PageCount"] = await _service.GetCountVendasAsync(name, description);
+            ViewData["PageCount"] = await _service.GetCountVendasAsync();
 
             var venda = await _service.GetByPageAndNameAndDescriptionAsync(page, name, description);
             return View(venda);

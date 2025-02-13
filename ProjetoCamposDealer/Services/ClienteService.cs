@@ -94,9 +94,9 @@ namespace ProjetoCamposDealer.Services
             return cliente;
         }
 
-        public async Task<int> GetCountClientesAsync(string name)
+        public async Task<int> GetCountClientesAsync()
         {
-            return await _context.GetCountClientesAsync(name);
+            return await _context.GetCountClientesAsync();
         }
     }
 }

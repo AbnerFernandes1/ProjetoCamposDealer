@@ -47,18 +47,8 @@ namespace ProjetoDealer.Application.Data.Context
             return await cliente.FirstOrDefaultAsync(c => c.idCliente == id);
         }
 
-        public async Task<int> GetCountClientesAsync(string name)
+        public async Task<int> GetCountClientesAsync()
         {
-            IQueryable<Venda> query = _context.Vendas
-                .Include(v => v.Produtos)
-                .Include(v => v.Clientes);
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                query = query.Where(p => p.Produtos.dscProduto
-                    .ToUpper().Contains(name.ToUpper()));
-            }
-
             return await _context.Clientes.CountAsync();
         }
     }

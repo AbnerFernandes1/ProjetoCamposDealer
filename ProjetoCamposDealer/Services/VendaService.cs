@@ -153,9 +153,9 @@ namespace ProjetoCamposDealer.Services
             return viewModel;
         }
 
-        public async Task<int> GetCountVendasAsync(string nameCliente, string descriptionProduto)
+        public async Task<int> GetCountVendasAsync()
         {
-            return await _vendasContext.GetCountVendasAsync(nameCliente, descriptionProduto);
+            return await _vendasContext.GetCountVendasAsync();
         }
     }
 }

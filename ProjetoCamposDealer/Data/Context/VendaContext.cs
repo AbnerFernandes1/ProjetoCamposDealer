@@ -24,25 +24,9 @@ namespace ProjetoDealer.Application.Data.Context
 
         }
 
-        public async Task<int> GetCountVendasAsync(string nameCliente, string descriptionProduto)
+        public async Task<int> GetCountVendasAsync()
         {
-            IQueryable<Venda> query = _context.Vendas
-                .Include(v => v.Produtos)
-                .Include(v => v.Clientes);
-
-            if (!string.IsNullOrEmpty(descriptionProduto))
-            {
-                query = query.Where(p => p.Produtos.dscProduto
-                    .ToUpper().Contains(descriptionProduto.ToUpper()));
-            }
-
-            if (!string.IsNullOrEmpty(nameCliente))
-            {
-                query = query.Where(p => p.Clientes.nmCliente
-                    .ToUpper().Contains(nameCliente.ToUpper()));
-            }
-
-            return await query.CountAsync();
+            return await _context.Vendas.CountAsync();
         }
 
         public async Task<Venda[]> GetVendasByPageByNamesAsync(int page, string nameCliente, string descriptionProduto)
