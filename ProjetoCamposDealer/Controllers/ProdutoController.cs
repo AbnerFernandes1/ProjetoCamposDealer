@@ -17,6 +17,8 @@ namespace ProjetoCamposDealer.Controllers
         [Route("lista")]
         public async Task<ViewResult> Index(int page, string name)
         {
+            ViewData["PageCount"] = await _service.GetCountProdutosAsync(name);
+
             var produto = await _service.GetByPageAndNameAsync(page, name);
             return View(produto);
         }
@@ -71,7 +73,7 @@ namespace ProjetoCamposDealer.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("idProduto, dscProduto, vlrUnitario")] Produto produto)
         {
             ModelState.Remove("Vendas");
-            
+
             if (ModelState.IsValid)
             {
                 var produtoContext = await _service.UpdateAsync(id, produto);

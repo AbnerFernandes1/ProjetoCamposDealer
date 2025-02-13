@@ -24,9 +24,33 @@ namespace ProjetoDealer.Application.Data.Context
 
         }
 
+        public async Task<int> GetCountVendasAsync(string nameCliente, string descriptionProduto)
+        {
+            IQueryable<Venda> query = _context.Vendas
+                .Include(v => v.Produtos)
+                .Include(v => v.Clientes);
+
+            if (!string.IsNullOrEmpty(descriptionProduto))
+            {
+                query = query.Where(p => p.Produtos.dscProduto
+                    .ToUpper().Contains(descriptionProduto.ToUpper()));
+            }
+
+            if (!string.IsNullOrEmpty(nameCliente))
+            {
+                query = query.Where(p => p.Clientes.nmCliente
+                    .ToUpper().Contains(nameCliente.ToUpper()));
+            }
+
+            return await query.CountAsync();
+        }
+
         public async Task<Venda[]> GetVendasByPageByNamesAsync(int page, string nameCliente, string descriptionProduto)
         {
-            int pageNumber = page <= 0 ? 1 : page;
+            if(page <= 0 || string.IsNullOrEmpty(nameCliente) == false || string.IsNullOrEmpty(descriptionProduto) == false)
+            {
+                page = 1;
+            }
 
             IQueryable<Venda> query = _context.Vendas
                 .Include(v => v.Produtos)
@@ -44,7 +68,7 @@ namespace ProjetoDealer.Application.Data.Context
                     .ToUpper().Contains(nameCliente.ToUpper()));
             }
 
-            query = query.Skip((pageNumber - 1) * Paginacao.LIMITE_PESQUISA_POR_PAGINA)
+            query = query.Skip((page - 1) * Paginacao.LIMITE_PESQUISA_POR_PAGINA)
                 .Include(v => v.Produtos)
                 .Include(v => v.Clientes)
                 .Take(Paginacao.LIMITE_PESQUISA_POR_PAGINA);

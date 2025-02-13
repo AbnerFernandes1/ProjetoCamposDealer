@@ -24,7 +24,7 @@ namespace ProjetoDealer.Domain
         [Range(1, 999, ErrorMessage = "{0} deve ser no mínimo {1} e no máximo {2}")]
         public int qtdVenda { get; set; }
 
-        [Display(Name = "Preço unitário")]
+        [Display(Name = "Preço unitário venda")]
         public float vlrUnitarioVenda { get; set; }
 
         [Display(Name = "Data pedido")]

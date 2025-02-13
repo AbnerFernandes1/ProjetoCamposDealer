@@ -17,6 +17,8 @@ namespace ProjetoCamposDealer.Controllers
         [Route("lista")]
         public async Task<ViewResult> Index(int page, string name, string description)
         {
+            ViewData["PageCount"] = await _service.GetCountVendasAsync(name, description);
+
             var venda = await _service.GetByPageAndNameAndDescriptionAsync(page, name, description);
             return View(venda);
         }
@@ -36,7 +38,7 @@ namespace ProjetoCamposDealer.Controllers
         {
             var viewModel = await _service.GetViewModelVendaAsync();
 
-            if(viewModel is null) return NotFound();
+            if (viewModel is null) return NotFound();
 
             return View(viewModel);
         }
@@ -60,7 +62,7 @@ namespace ProjetoCamposDealer.Controllers
             }
 
             var viewModel = await _service.GetViewModelVendaAsync();
-            
+
             return View(viewModel);
         }
 
@@ -69,14 +71,14 @@ namespace ProjetoCamposDealer.Controllers
         {
             var viewModel = await _service.GetViewModelVendaAsync(id);
 
-            if(viewModel is null) return NotFound();
+            if (viewModel is null) return NotFound();
 
             return View(viewModel);
         }
 
         [HttpPost("editar/{id:int}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("idCliente, idProduto, qtdVenda")] VendaViewModel model)
+        public async Task<IActionResult> Edit(int id, [Bind("idVenda, idCliente, idProduto, qtdVenda")] VendaViewModel model)
         {
             ModelState.Remove("ClientesLista");
             ModelState.Remove("ProdutosLista");
@@ -93,7 +95,7 @@ namespace ProjetoCamposDealer.Controllers
             }
 
             var viewModel = await _service.GetViewModelVendaAsync();
-            
+
             return View(viewModel);
         }
 

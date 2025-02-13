@@ -31,20 +31,12 @@
                 <span asp-validation-for="idProduto" class="text-danger"></span>
             </div>
             <div class="container p-1">
-                <label class="col-form-label">Clientes</label>
+                <label class="col-form-label">Cliente</label>
                 <select asp-for="idCliente" class="form-select" aria-label="Default select example">
                     @{
                         if (Model.ClientesLista is not null)
                         {
                             <option value="@Model.idCliente" selected>@Model.Clientes.nmCliente</option>    
-
-                            @foreach (var cliente in Model.ClientesLista)
-                            {
-                                if(Model.idCliente != cliente.idCliente)
-                                {
-                                    <option value="@cliente.idCliente">@cliente.nmCliente</option>
-                                }
-                            }
                         }
                     }
                 </select>
@@ -57,6 +49,7 @@
             </div>
 
             <div class="btn-group-sm p-1">
+                <input type="hidden" asp-for="idVenda"></input>
                 <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
                 <a asp-action="Index" class="btn btn-danger btn-sm">Cancelar</a>
             </div>

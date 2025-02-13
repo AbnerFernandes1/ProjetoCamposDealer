@@ -4,6 +4,7 @@ namespace ProjetoCamposDealer.Services.Interfaces
 {
     public interface IProdutoService
     {
+        Task<int> GetCountProdutosAsync(string descricao);
         Task<Produto> AddAsync(Produto model);
         Task<Produto> UpdateAsync(int id, Produto model);
         Task<bool> DeleteAsync(int id);

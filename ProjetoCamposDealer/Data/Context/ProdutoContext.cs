@@ -22,8 +22,10 @@ namespace ProjetoDealer.Application.Data.Context
 
         public async Task<Produto[]> GetProdutosAsync(int page, string descricao)
         {
-            int pageNumber = page <= 0 ? 1 : page;
-
+            if(page <= 0 || string.IsNullOrEmpty(descricao) == false)
+            {
+                page = 1;
+            }
             IQueryable<Produto> query = _context.Produtos.AsNoTracking();
 
             if (!string.IsNullOrEmpty(descricao))
@@ -31,7 +33,7 @@ namespace ProjetoDealer.Application.Data.Context
                 query = query.Where(c => c.dscProduto.ToUpper().Contains(descricao.ToUpper()));
             }
 
-            query = query.Skip((pageNumber - 1) * Paginacao.LIMITE_PESQUISA_POR_PAGINA)
+            query = query.Skip((page - 1) * Paginacao.LIMITE_PESQUISA_POR_PAGINA)
                 .Take(Paginacao.LIMITE_PESQUISA_POR_PAGINA);
 
             return await query.ToArrayAsync();
@@ -42,6 +44,21 @@ namespace ProjetoDealer.Application.Data.Context
             var produto = _context.Produtos.AsNoTracking();
 
             return await produto.FirstOrDefaultAsync(p => p.idProduto == id);
+        }
+
+        public async Task<int> GetCountProdutosAsync(string descricao)
+        {
+            IQueryable<Venda> query = _context.Vendas
+                .Include(v => v.Produtos)
+                .Include(v => v.Clientes);
+
+            if (!string.IsNullOrEmpty(descricao))
+            {
+                query = query.Where(p => p.Produtos.dscProduto
+                    .ToUpper().Contains(descricao.ToUpper()));
+            }
+
+            return await _context.Produtos.CountAsync();
         }
     }
 }

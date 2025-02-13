@@ -5,6 +5,7 @@ namespace ProjetoCamposDealer.Services.Interfaces
 {
     public interface IVendaService
     {
+        Task<int> GetCountVendasAsync(string nameCliente, string descriptionProduto);
         Task<Venda> AddAsync(VendaViewModel model);
         Task<Venda> UpdateAsync(int id, Venda model);
         Task<bool> DeleteAsync(int id);

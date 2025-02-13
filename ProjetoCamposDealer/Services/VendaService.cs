@@ -63,6 +63,12 @@ namespace ProjetoCamposDealer.Services
 
                 if (venda is null) return null;
 
+                var produto = await _produtoContext.GetProdutoByIdAsync(model.idProduto);
+
+                model.vlrTotalVenda = produto.vlrUnitario.Value * model.qtdVenda;
+                model.vlrUnitarioVenda = produto.vlrUnitario.Value;
+                model.idCliente = venda.idCliente;
+
                 _persistence.Update(model);
 
                 if (await _persistence.SaveChangesAsync())
@@ -145,6 +151,11 @@ namespace ProjetoCamposDealer.Services
             }
 
             return viewModel;
+        }
+
+        public async Task<int> GetCountVendasAsync(string nameCliente, string descriptionProduto)
+        {
+            return await _vendasContext.GetCountVendasAsync(nameCliente, descriptionProduto);
         }
     }
 }
