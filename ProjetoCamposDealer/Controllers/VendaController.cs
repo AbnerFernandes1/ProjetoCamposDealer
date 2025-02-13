@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoCamposDealer.Services.Interfaces;
-using ProjetoCamposDealer.ViweModel;
+using ProjetoCamposDealer.ViewModel;
 
 namespace ProjetoCamposDealer.Controllers
 {

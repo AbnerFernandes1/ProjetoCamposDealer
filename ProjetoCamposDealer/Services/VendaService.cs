@@ -1,5 +1,5 @@
-using ProjetoCamposDealer.Models;
 using ProjetoCamposDealer.Services.Interfaces;
+using ProjetoCamposDealer.ViewModel;
 using ProjetoDealer.Application.Data.Interfaces;
 using ProjetoDealer.Domain;
 
