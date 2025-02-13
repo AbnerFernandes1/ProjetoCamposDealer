@@ -120,8 +120,6 @@ namespace ProjetoCamposDealer.Services
             if(id > 0)
             {
                 var venda = await _vendasContext.GetVendaByIdAsync(id);
-                var produtos = await _produtoContext.GetProdutoByIdAsync(venda.idProduto);
-                var clientes = await _clienteContext.GetClienteByIdAsync(venda.idCliente);
 
                 viewModel = new VendaViewModel
                 {
@@ -133,8 +131,8 @@ namespace ProjetoCamposDealer.Services
                     vlrTotalVenda = venda.vlrTotalVenda,
                     vlrUnitarioVenda = venda.vlrUnitarioVenda,
                     qtdVenda = venda.qtdVenda,
-                    Produtos = produtos,
-                    Clientes = clientes,
+                    Produtos = venda.Produtos,
+                    Clientes = venda.Clientes,
                 };
             }
             else
