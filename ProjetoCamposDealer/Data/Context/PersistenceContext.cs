@@ -16,6 +16,11 @@ namespace ProjetoDealer.Application.Data.Context
             _context.Add(entity);
         }
 
+        public void AddRange<T>(T entity) where T : class
+        {
+            _context.AddRange(entity);
+        }
+
         public void Update<T>(T entity) where T : class
         {
             _context.Update(entity);
