@@ -21,6 +21,7 @@ builder.Services.AddScoped<IVendaContext, VendaContext>();
 builder.Services.AddScoped<IClienteContext, ClienteContext>();
 builder.Services.AddScoped<IPersistenceContext, PersistenceContext>();
 builder.Services.AddScoped<IProdutoContext, ProdutoContext>();
+builder.Services.AddScoped<IVendaEndpointsService, VendaEndpointsService>();
 
 var app = builder.Build();
 

@@ -17,10 +17,17 @@ namespace ProjetoCamposDealer.Controllers
         [Route("lista")]
         public async Task<IActionResult> Index(int page, string name)
         {
-            ViewData["PageCount"] = await _service.GetCountClientesAsync();
+            try
+            {
+                ViewData["PageCount"] = await _service.GetCountClientesAsync();
 
-            var cliente = await _service.GetByPageAndNameAsync(page, name);
-            return View(cliente);
+                var cliente = await _service.GetByPageAndNameAsync(page, name);
+                return View(cliente);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
 
         [Route("novo")]

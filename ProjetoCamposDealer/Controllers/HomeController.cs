@@ -1,26 +1,45 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoCamposDealer.Models;
+using ProjetoCamposDealer.Services.Interfaces;
+using ProjetoDealer.Application.Data.Context;
 
 namespace ProjetoCamposDealer.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IVendaEndpointsService _service;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IVendaEndpointsService service, AppDbContext context)
         {
-            _logger = logger;
+            _service = service;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            try
+            {
+                if (_context.Produtos.ToArray().Length is 0)
+                {
+                    return View(true);
+                }
+
+                return View();
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
 
-        public IActionResult Privacy()
+        [Route("carregar")]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            await _service.AddVendasExternasAsync();
+
+            return View("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

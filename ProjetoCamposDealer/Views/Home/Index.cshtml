@@ -1,7 +1,22 @@
-﻿@{
+﻿@model bool
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bem vindo</h1>
+    <h1 class="display-4 text-success">Bem vindo</h1>
+
+    @{
+        if(Model)
+        {
+            <p>Deseja carregar dados externos ?</p>
+            <a asp-action="Create" class="btn btn-warning btm sm">Carregar</a>
+        }
+        else
+        {
+            <h3 class="text-primary display-4">Teste de conhecimento para Campos Dealer</h3>
+        }
+    }
+
 </div>
